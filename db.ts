@@ -4,21 +4,21 @@ export const messages: Message[] = [
   {
     id: 1,
     message: 'Buenas buenardovich',
-    date: '12 de Febrero',
+    date: new Date('2025-04-22T15:00:00Z'),
   },
   {
     id: 2,
     message: 'Buenas tardes Amigardo',
-    date: '212 de Marzimay',
+    date: new Date('2025-14-22T17:00:00Z'),
   },
   {
     id: 3,
     message: 'Polimrado Buenardopolis, no lo olvides.',
-    date: '16 de Marzo',
+    date: new Date('2025-14-22T17:00:00Z'),
   },
   {
     id: 4,
     message: 'Leche, huevo, pan, aceite, manteca, tomate, lechuga.',
-    date: '30 de Junio',
+    date: new Date('2025-14-22T17:00:00Z'),
   },
 ];
