@@ -1,19 +1,27 @@
-import { messages } from '../db.ts';
-import { Message } from '../models/message.ts';
+import {
+  getDBMessages,
+  postDBMessage,
+  deleteDBMessage,
+} from '../db/queries.ts';
 import { Request, Response } from 'express';
 
-// _req = NO TYPESCRIPT RAGE
-export const getMessages = (_req: Request, res: Response) => {
-  res.status(200).json(messages as Message[]);
+// _req = NO TYPESCRIPT RAGE / GET ALL MESSAGES
+// _req = NO TYPESCRIPT RAGE / GET ALL MESAGES
+export const getMessages = async (_req: Request, res: Response) => {
+  const messages = await getDBMessages();
+  res.status(200).json(messages);
 };
 
-export const postMessage = (req: Request, res: Response) => {
-  const body = req.body;
-  const message = {
-    id: messages.length + 1,
-    message: body.message,
-    date: body.date,
-  };
-  messages.push(message);
-  res.status(201).json(messages);
+// POST (body = {MESSAGE & DATE}) => MESSAGE.DB
+export const postMessage = async (req: Request, res: Response) => {
+  const { message, date } = req.body;
+  await postDBMessage(message, date);
+  res.status(200).json({ message: 'Mensaje añadido correctamente!' });
+};
+
+// DEL (ID) => DELETE MESSAGE.DB
+export const deleteMessages = async (req: Request, res: Response) => {
+  const { id } = req.body;
+  await deleteDBMessage(id);
+  res.status(200).json({ message: 'Mensaje eliminado correctamente!' });
 };

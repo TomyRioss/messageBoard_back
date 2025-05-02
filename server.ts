@@ -5,8 +5,10 @@ import dotenv from 'dotenv';
 
 import { messageRouter } from './routes/messagesRoute.ts';
 
+import { checkMessage } from './middlewares/messageMiddlewares.ts';
+
 // ENV. VARS.
-const PORT = dotenv.config().parsed?.PORT || 8080;
+const PORT = dotenv.config().parsed?.PORT || 5173;
 
 // CORS = SECURITY+
 app.use(cors());
@@ -14,8 +16,9 @@ app.use(cors());
 // PARSE JSON
 app.use(express.json());
 
-app.use('/messages', messageRouter);
+app.use('/messages', checkMessage, messageRouter);
 
+console.log('Preparando para levantar el servidor...');
 app.listen(PORT, () => {
-  console.log('Servidor corriendose satisfactoriamente!');
+  console.log(`Servidor corriendose satisfactoriamente en el puerto ${PORT}!`);
 });
